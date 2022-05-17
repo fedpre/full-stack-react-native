@@ -11,10 +11,11 @@
     "react-native/react-native": true
   },
   "parserOptions": {
-    "requireConfigFile": false,
+    "requireConfigFile": false
   },
   "rules": {
     "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "semi": [2, "always"]
   }
 }
