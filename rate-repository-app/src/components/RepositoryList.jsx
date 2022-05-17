@@ -1,6 +1,7 @@
 import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import Constants from "expo-constants";
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   separator: {
@@ -9,7 +10,12 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     flexShrink: 1,
+    backgroundColor: theme.colors.mainBackground,
   },
+  itemContainer: {
+    padding: 10,
+    backgroundColor: "blue"
+  }
 });
 
 const repositories = [
