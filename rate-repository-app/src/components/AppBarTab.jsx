@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet } from "react-native";
 import theme from "../theme";
 import Text from "./Text";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   subheading: {
@@ -10,9 +11,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = ({ name }) => {
+
+const AppBarTab = ({ name, navigateTo }) => {
+  const navigation = useNavigation()
+
   return (
-    <Pressable>
+    <Pressable onPress={() => { navigation.navigate(navigateTo)}}>
       <Text fontSize="subheading" style={styles.subheading} fontWeight="bold">
         {name}
       </Text>
