@@ -6,7 +6,6 @@ import AppBarTab from './AppBarTab';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
-
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
