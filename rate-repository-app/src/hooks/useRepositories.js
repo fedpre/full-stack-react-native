@@ -8,7 +8,7 @@ const useRepositories = () => {
     const { data, error } = useQuery(GET_REPOSITORIES, {
         fetchPolicy: 'cache-and-network',
      });
-
+     if (data)
      data.repositories.edges.map(entry => {
          repositories.push(entry);
      })

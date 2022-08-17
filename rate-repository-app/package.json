@@ -16,6 +16,7 @@
     "@expo/webpack-config": "~0.16.2",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/stack": "^6.2.1",
+    "dotenv": "^16.0.1",
     "expo": "^45.0.4",
     "expo-constants": "~13.1.1",
     "expo-file-system": "^14.0.0",

@@ -8,6 +8,8 @@ import RepositoryList from "./src/components/RepositoryList";
 import SignIn from "./src/components/SignIn";
 import createApolloClient from "./src/utils/apolloClient";
 
+import Constants from "expo-constants";
+
 const apolloClient = createApolloClient()
 const Stack = createStackNavigator()
 
