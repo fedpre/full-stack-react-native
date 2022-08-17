@@ -44,7 +44,11 @@ const SignIn = () => {
       <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
         {({ handleSubmit }) => (
           <View>
-            <FormikTextInput name="username" placeholder="Username" />
+            <FormikTextInput 
+              name="username" 
+              placeholder="Username" 
+              autocomplete="off"
+            />
             <FormikTextInput
               name="password"
               placeholder="Password"
