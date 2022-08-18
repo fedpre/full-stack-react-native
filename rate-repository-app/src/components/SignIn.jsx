@@ -32,13 +32,14 @@ const SignIn = () => {
     },
   });
 
-  const [signIn, result] = useSignIn();
+  const [signIn] = useSignIn();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
 
     try {
-      console.log(result.data.authenticate.accessToken);
+      const { data } = await signIn({ username, password });
+      console.log(data);
     } catch (e) {
       console.log('error:' + e)
     }
