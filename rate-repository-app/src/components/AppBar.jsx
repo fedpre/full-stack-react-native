@@ -33,6 +33,7 @@ const AppBar = () => {
   });
   const apolloClient = useApolloClient();
 
+  if(data)
   if (data.me != null) {
     signedIn = true;
   }
