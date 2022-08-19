@@ -8,8 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import useAuthStorage from "../hooks/useAuthStorage";
 import { useApolloClient } from "@apollo/client";
 
-
-const SignIn = () => {
+export const SignInContainer = ({ HandleOnSubmit }) => {
   const validationSchema = yup.object().shape({
     username: yup
       .string()
@@ -34,25 +33,6 @@ const SignIn = () => {
       fontSize: 18,
     },
   });
-  const navigation = useNavigation();
-  const [signIn] = useSignIn();
-  const authStorage = useAuthStorage();
-  const apolloClient = useApolloClient();
-
-  const onSubmit = async (values) => {
-    const { username, password } = values;
-
-    try {
-      const { data } = await signIn({ username, password });
-      await authStorage.setAccessToken(data.authenticate.accessToken);
-      const token = await authStorage.getAccessToken();
-      console.log('Storage Token: ' + token);
-      apolloClient.resetStore();
-      navigation.navigate('RepositoryList')
-    } catch (e) {
-      console.log('error:' + e)
-    }
-  };
 
   const initialValues = {
     username: "",
@@ -61,7 +41,7 @@ const SignIn = () => {
 
   return (
     <View>
-      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+      <Formik initialValues={initialValues} onSubmit={HandleOnSubmit} validationSchema={validationSchema}>
         {({ handleSubmit }) => (
           <View>
             <FormikTextInput 
@@ -82,6 +62,30 @@ const SignIn = () => {
       </Formik>
     </View>
   );
+};
+
+const SignIn = () => {
+  const navigation = useNavigation();
+  const [signIn] = useSignIn();
+  const authStorage = useAuthStorage();
+  const apolloClient = useApolloClient();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      await authStorage.setAccessToken(data.authenticate.accessToken);
+      const token = await authStorage.getAccessToken();
+      console.log('Storage Token: ' + token);
+      apolloClient.resetStore();
+      navigation.navigate('RepositoryList')
+    } catch (e) {
+      console.log('error:' + e)
+    }
+  };
+
+  return <SignInContainer HandleOnSubmit={onSubmit} />
 };
 
 export default SignIn;
