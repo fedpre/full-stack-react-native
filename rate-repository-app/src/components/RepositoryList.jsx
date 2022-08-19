@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ navigation, repositories }) => {
   const repositoryNodes = repositories
     ? repositories.map(edge => edge.node)
     : [];
@@ -42,16 +42,18 @@ export const RepositoryListContainer = ({ repositories }) => {
           ratingAverage={item.ratingAverage}
           reviewCount={item.reviewCount}
           avatarUrl={item.ownerAvatarUrl}
+          url={item.url}
+          navigation={navigation}
         />
       )}
     />
   );
 };
 
-const RepositoryList = () => {
+const RepositoryList = ({ navigation }) => {
   const { repositories } = useRepositories();
 
-  return <RepositoryListContainer repositories={repositories} />;
+  return <RepositoryListContainer navigation={navigation} repositories={repositories} />;
 };
 
 export default RepositoryList;

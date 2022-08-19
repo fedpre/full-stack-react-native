@@ -38,11 +38,12 @@ const styles = StyleSheet.create({
   },
 })
 
-const RepositoryItem = ( { navigation, ...props } ) => {
+const RepositoryItemDetails = ({ navigation, route }) => {
+
+  const { props } = route.params;
+  console.log(props);
+
   return (
-    <Pressable onPress={() => navigation.navigate('RepositoryItemDetails', {
-      props: props
-    })}>
       <View testID="repositoryItem" style={styles.bodyContainer}>
         <View style={styles.imgNameContainer}>
           <Image 
@@ -62,8 +63,7 @@ const RepositoryItem = ( { navigation, ...props } ) => {
           <DescriptionBox label="Rating" content={props.ratingAverage}/>
         </View>
       </View>
-    </Pressable>
   );
 };
 
-export default RepositoryItem;
+export default RepositoryItemDetails;
