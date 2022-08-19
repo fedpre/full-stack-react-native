@@ -3,6 +3,7 @@ import theme from '../theme';
 import DescriptionBox from './DescriptionBox';
 import Language from './Language';
 import Text from "./Text";
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
   pb1: {
@@ -36,6 +37,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  btn: {
+    backgroundColor: "#2245C4",
+    padding: 15,
+    margin: 15,
+    borderRadius: 5,
+  },
+  btnText: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 18,
+  },
 })
 
 const RepositoryItemDetails = ({ navigation, route }) => {
@@ -62,6 +74,9 @@ const RepositoryItemDetails = ({ navigation, route }) => {
           <DescriptionBox label="Reviews" content={props.reviewCount}/>
           <DescriptionBox label="Rating" content={props.ratingAverage}/>
         </View>
+        <Pressable onPress={() => Linking.openURL(props.url)} style={styles.btn}>
+          <Text style={styles.btnText}>Open in GitHub</Text>
+        </Pressable>
       </View>
   );
 };
