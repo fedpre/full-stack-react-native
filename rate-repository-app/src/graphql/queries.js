@@ -15,11 +15,24 @@ export const GET_REPOSITORIES = gql`
                     ownerAvatarUrl
                     id
                     url
+                    reviews {
+                        edges {
+                          node {
+                            id
+                            text
+                            rating
+                            createdAt
+                            user {
+                              id
+                              username
+                            }
+                          }
+                        }
                     }
                 }
             }
         }
-`;
+    }`;
 
 export const CHECK_AUTHENTICATED_USER = gql`
     {

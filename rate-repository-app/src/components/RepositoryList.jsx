@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const ItemSeparator = () => <View style={styles.separator} />;
+export const ItemSeparator = () => <View style={styles.separator} />;
 
 export const RepositoryListContainer = ({ navigation, repositories }) => {
   const repositoryNodes = repositories
@@ -43,6 +43,7 @@ export const RepositoryListContainer = ({ navigation, repositories }) => {
           reviewCount={item.reviewCount}
           avatarUrl={item.ownerAvatarUrl}
           url={item.url}
+          reviews={item.reviews}
           navigation={navigation}
         />
       )}

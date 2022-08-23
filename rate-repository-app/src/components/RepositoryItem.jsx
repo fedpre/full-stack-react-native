@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
 })
 
 const RepositoryItem = ( { navigation, ...props } ) => {
+
   return (
     <Pressable onPress={() => navigation.navigate('RepositoryItemDetails', {
       props: props

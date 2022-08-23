@@ -1,9 +1,10 @@
-import { Image, Pressable, StyleSheet, View } from 'react-native'
+import { FlatList, Image, Pressable, StyleSheet, View } from 'react-native'
 import theme from '../theme';
 import DescriptionBox from './DescriptionBox';
 import Language from './Language';
 import Text from "./Text";
 import * as Linking from 'expo-linking';
+import { ItemSeparator } from './RepositoryList';
 
 const styles = StyleSheet.create({
   pb1: {
@@ -48,12 +49,49 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
   },
+  separator: {
+    height: 10,
+  },
+    container: {
+    flexGrow: 1,
+    flexShrink: 1,
+    backgroundColor: theme.colors.mainBackground,
+  },
+    bodyContainer: {
+    padding: 20,
+    backgroundColor: theme.colors.white,
+    shadowColor: "black",
+  },
+  bodyContainerDetail: {
+    padding: 20,
+    backgroundColor: theme.colors.white,
+    shadowColor: "black",
+    flexDirection: "row"
+  },
 })
+
+const ReviewItem = ({ review }) => {
+  console.log(review.node.createdAt);
+  const newDate = new Date(review.node.createdAt)
+  const formattedDate = `${newDate.getDay()}.${newDate.getMonth()}.${newDate.getFullYear()}`
+  console.log(formattedDate);
+  return (
+    <View style={styles.bodyContainerDetail}>
+      <View>
+        <Text style={{ borderRadius: 23, borderWidth: 2, padding: 10, borderColor: theme.colors.primary, color: theme.colors.primary, fontWeight: 'bold', fontSize: 18}}>{review.node.rating}</Text>
+      </View>
+      <View style={{ paddingLeft: 10}}>
+        <Text style={{fontWeight: 'bold', fontSize: 16, paddingBottom: 3 }}>{review.node.user.username}</Text>
+        <Text style={{ paddingBottom: 10 }}>{formattedDate}</Text>
+        <Text>{review.node.text}</Text>
+      </View>
+    </View>
+  )
+};
 
 const RepositoryItemDetails = ({ navigation, route }) => {
 
   const { props } = route.params;
-  console.log(props);
 
   return (
       <View testID="repositoryItem" style={styles.bodyContainer}>
@@ -77,6 +115,12 @@ const RepositoryItemDetails = ({ navigation, route }) => {
         <Pressable onPress={() => Linking.openURL(props.url)} style={styles.btn}>
           <Text style={styles.btnText}>Open in GitHub</Text>
         </Pressable>
+        <FlatList 
+          style={styles.container}
+          data={props.reviews.edges}
+          ItemSeparatorComponent={ItemSeparator}
+          renderItem={({ item }) => <ReviewItem review={item} />}
+        />
       </View>
   );
 };
