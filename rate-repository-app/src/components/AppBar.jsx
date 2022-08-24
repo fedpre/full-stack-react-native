@@ -56,6 +56,10 @@ const AppBar = () => {
             name="Repositories"
             navigateTo='RepositoryList'
           />
+          <AppBarTab
+            name="Review Form"
+            navigateTo='ReviewForm'
+          />
           <AppBarTabSignOut 
             name="Sign Out"
             action={signOut}

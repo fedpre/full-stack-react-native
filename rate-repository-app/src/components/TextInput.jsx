@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#bbb',
     borderRadius: 5,
+    height: 50
   },
   inputError: {
     padding: 15,

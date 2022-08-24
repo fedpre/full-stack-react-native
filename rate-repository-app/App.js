@@ -12,6 +12,7 @@ import AuthStorageContext from "./src/contexts/authContextStorage";
 import RepositoryItemDetails from "./src/components/RepositoryItemDetails";
 import { CHECK_AUTHENTICATED_USER } from "./src/graphql/queries";
 import { View } from "react-native";
+import ReviewForm from "./src/components/ReviewForm";
 
 
 const authStorage = new AuthStorage();
@@ -61,6 +62,13 @@ const App = () => {
             <Stack.Screen 
               name="RepositoryItemDetails"
               component={RepositoryItemDetails}
+              options={{
+                header: props => <AppBar {...props} />
+              }}
+            />
+            <Stack.Screen 
+              name="ReviewForm"
+              component={ReviewForm}
               options={{
                 header: props => <AppBar {...props} />
               }}
