@@ -13,6 +13,7 @@ import RepositoryItemDetails from "./src/components/RepositoryItemDetails";
 import { CHECK_AUTHENTICATED_USER } from "./src/graphql/queries";
 import { View } from "react-native";
 import ReviewForm from "./src/components/ReviewForm";
+import SignUp from "./src/components/SignUp";
 
 
 const authStorage = new AuthStorage();
@@ -55,6 +56,13 @@ const App = () => {
             <Stack.Screen 
               name="SignIn"
               component={SignIn}
+              options={{
+                header: props => <AppBar {...props} />
+              }}
+            />
+            <Stack.Screen 
+              name="SignUp"
+              component={SignUp}
               options={{
                 header: props => <AppBar {...props} />
               }}
