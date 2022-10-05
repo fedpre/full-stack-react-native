@@ -3,6 +3,7 @@ import RepositoryItem from './RepositoryItem';
 import theme from '../theme';
 import { useEffect, useState } from 'react';
 import useRepositories from '../hooks/useRepositories';
+import { Picker } from '@react-native-picker/picker';
 
 const styles = StyleSheet.create({
   separator: {
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
 
 export const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ navigation, repositories }) => {
+export const RepositoryListContainer = ({ navigation, repositories, setOrder, selectedOrder }) => {
   const repositoryNodes = repositories
     ? repositories.map(edge => edge.node)
     : [];
@@ -31,6 +32,17 @@ export const RepositoryListContainer = ({ navigation, repositories }) => {
       style={styles.container}
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
+      ListHeaderComponent={
+        <Picker
+          selectedValue={selectedOrder}
+          onValueChange={(itemValue, itemIndex) =>
+            setOrder(itemValue)
+            }>
+            <Picker.Item label="Latest repository" value="ls" />
+            <Picker.Item label="Highest rated repositories" value="hrr" />
+            <Picker.Item label="Lowest rated repositories" value="lrr" />
+        </Picker>
+      }
       renderItem={({ item, index, separators}) => (
         <RepositoryItem
           key={item.id}
@@ -52,12 +64,31 @@ export const RepositoryListContainer = ({ navigation, repositories }) => {
 };
 
 const RepositoryList = ({ navigation }) => {
-  const [orderBy, setOrderBy] = useState('RATING_AVERAGE')
+  const [selectedOrder, setSelectedOrder] = useState();
+
+  const [orderBy, setOrderBy] = useState('CREATED_AT')
   const [orderDirection, setOrderDirection] = useState('DESC')
+
+  const changeOrder = () => {
+      if (selectedOrder === "ls") {
+          setOrderBy('CREATED_AT')
+          setOrderDirection('DESC')
+      } else if (selectedOrder === "hrr") {
+          setOrderBy('RATING_AVERAGE')
+          setOrderDirection('DESC')
+      } else {
+          setOrderBy('RATING_AVERAGE')
+          setOrderDirection('ASC')
+      }
+  }
+
+  useEffect(() => {
+      changeOrder()
+  }, [selectedOrder])
 
   const { repositories } = useRepositories(orderBy, orderDirection);
 
-  return <RepositoryListContainer navigation={navigation} repositories={repositories} />;
+  return <RepositoryListContainer navigation={navigation} repositories={repositories} setOrder={setSelectedOrder} selectedOrder={selectedOrder}/>;
 };
 
 export default RepositoryList;
