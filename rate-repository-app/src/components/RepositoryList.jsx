@@ -52,7 +52,10 @@ export const RepositoryListContainer = ({ navigation, repositories }) => {
 };
 
 const RepositoryList = ({ navigation }) => {
-  const { repositories } = useRepositories();
+  const [orderBy, setOrderBy] = useState('RATING_AVERAGE')
+  const [orderDirection, setOrderDirection] = useState('DESC')
+
+  const { repositories } = useRepositories(orderBy, orderDirection);
 
   return <RepositoryListContainer navigation={navigation} repositories={repositories} />;
 };
